@@ -9,10 +9,13 @@
   },
   "dependencies": {
     "@puckeditor/core": "^0.21.2",
+    "@tailwindcss/postcss": "^4.2.4",
     "classnames": "^2.3.2",
     "next": "^16.0.8",
+    "postcss": "^8.5.10",
     "react": "^19.2.1",
-    "react-dom": "^19.2.1"
+    "react-dom": "^19.2.1",
+    "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",

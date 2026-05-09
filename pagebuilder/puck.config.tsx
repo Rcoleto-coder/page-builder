@@ -1,8 +1,13 @@
-import { DropZone, type Config } from "@puckeditor/core";
+import { Slot, type Config } from "@puckeditor/core";
 
 type Props = {
   HeadingBlock: { title: string };
-  GridBlock: {};
+  GridBlock: {children: Slot};
+  CardBlock: {
+    title: string
+    description: string
+    padding: number
+  }
 };
 
 export const config: Config<Props> = {
@@ -15,14 +20,38 @@ export const config: Config<Props> = {
         title: "Heading",
       },
       render: ({ title }) => (
-        <div style={{ padding: 64 }}>
+        <div>
           <h1>{title}</h1>
         </div>
       ),
     },
     GridBlock: {
-      render: () => {
-        return <DropZone zone="grid" style={{display: "grid", gridTemplateColumns: "repeat(3, 1fr"}} />
+      fields: {
+        children: { type: "slot" }
+      },
+      defaultProps: {
+        children: [],
+      },
+      render: ({children: Children}) => {
+        return <Children />
+      }
+    },
+    CardBlock: {
+      fields: {
+        title: { type: "text" },
+        description: { type: "textarea"},
+        padding: { type: "number"}
+      },
+      defaultProps: {
+        title: "Card title",
+        description: "This is a description...",
+        padding: 16
+      },
+      render: ({title, description, padding: padding}) => {
+        return <div style={{padding}}>
+          <h2>{title}</h2>
+          <p>{description}</p>
+        </div>
       }
     },
   },
